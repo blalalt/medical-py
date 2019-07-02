@@ -10,7 +10,6 @@ app = Flask(__name__)
 
 app.config.from_object(config)
 
-
 @app.route('/api/disease_list/<int:page>', methods=['GET'])
 def disease_list(page: int=0):
     collection = db.get_collection(name='disease') # Collection
