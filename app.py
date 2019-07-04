@@ -10,6 +10,9 @@ app = Flask(__name__)
 
 app.config.from_object(config)
 
+def reconstruce_doc(disease_doc: dict):
+    pass
+
 @app.route('/api/disease_list/<int:page>', methods=['GET'])
 def disease_list(page: int=0):
     collection = db.get_collection(name='disease') # Collection
@@ -19,6 +22,12 @@ def disease_list(page: int=0):
     u_result = jsonb.dumps(list(find_result))
     # print('type: ', type(jsonb.dumps(list(find_result))), jsonb.dumps(list(find_result)))
     return jsonify(json.loads(u_result))
+
+@app.route('/api/disease/<int:id>', methods=['GET'])
+def disease_doc(id: str):
+    collection = db.get_collection(name='disease') # Collection
+    d = collection.find_one(filter={'_id': jsonb.ObjectId(id)})
+
 
 
 
