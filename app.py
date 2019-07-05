@@ -4,9 +4,10 @@ from flask import Flask, jsonify, request
 from pymongo import MongoClient
 from bson import json_util as jsonb
 from setting import config
-from intention import intention_classifier
+from intention import intention_classifier, IT_TYPE
+from model import db
 
-db = MongoClient()['medical']
+
 app = Flask(__name__)
 
 app.config.from_object(config)
@@ -17,17 +18,18 @@ collection = db.get_collection(name='disease')
 
 
 class ChatResponse:
-    def __init__(self, it_type, msg):
+    def __init__(self, it_type, msg, *args, **kwargs):
         self.it_type = it_type
         self.msg = msg
     def build(self):
-        if self.it_type == 1: # 概念
+        if self.it_type == IT_TYPE.CONCEPT: # 概念
             return self._build_concept_resp()
-        elif self.it_type == 2: # 闲聊
+        elif self.it_type == IT_TYPE.CHAT: # 闲聊
             return self._build_chat_resp()
-        elif self.it_type == 3: # 巡诊
+        elif self.it_type == IT_TYPE.INQUIRY: # 巡诊
             return self._build_inquiry_resp()
-    
+        elif self.it_type == IT_TYPE.TREATMENT: # 治疗
+            return self._build_treatment_resp()
     def _build_concept_resp(self):
         result = collection.find_one(filter={'疾病名称': self.msg}, 
             projection={'_id': 1, '概述': 1, '疾病名称': 1})
@@ -39,6 +41,9 @@ class ChatResponse:
         return None
 
     def _build_inquiry_resp(self):
+        return None
+
+    def _build_treatment_resp(self):
         return None
 
 def reconstruce_doc(disease_doc: dict):
