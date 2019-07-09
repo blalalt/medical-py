@@ -74,7 +74,7 @@ def disease_doc(id: str):
     result = reconstruce_doc(d)
     return jsonify(result), 200
 
-@app.route('/api/chat', methods=['GET', 'POST'])
+@app.route ('/api/chat', methods=['GET', 'POST'])
 def chat():
     msg = request.args.get('msg')
     it_type = intention_classifier.classify(msg)

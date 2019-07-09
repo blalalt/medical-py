@@ -9,6 +9,9 @@ autopep8 = "*"
 
 [packages]
 pymongo = "*"
+bs4 = "*"
+lxml = "*"
+xlswriter = "*"
 
 [requires]
 python_version = "3.6"
