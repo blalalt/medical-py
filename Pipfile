@@ -11,7 +11,8 @@ autopep8 = "*"
 pymongo = "*"
 bs4 = "*"
 lxml = "*"
-xlswriter = "*"
+numpy = "*"
+xlsxwriter = "*"
 
 [requires]
 python_version = "3.6"

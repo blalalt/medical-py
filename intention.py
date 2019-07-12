@@ -13,11 +13,11 @@ class IT_TYPE:
 
 class IntentionClassifier:
     def __init__(self, train=False):
-        if train:
-            self.model = self.train()
-        else:
-            self.model = self.load_model()
-        
+        pass
+        # if train:
+        #     self.model = self.train()
+        # else:
+        #     self.model = self.load_model()
 
     def classify(self, msg: str):
         collection = db.get_collection(name='disease') # Collection

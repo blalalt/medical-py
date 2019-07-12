@@ -6,6 +6,6 @@ class Config:
     SORT_KTY = '疾病名称'
 
     # result
-    PER_PAGE = 10
+    PER_PAGE = 20
     
 config = Config()
